@@ -1,6 +1,7 @@
 import boto3
 import os
 import json
+import datetime
 
 LTName = os.environ['TemplateName']
 client = boto3.client('ec2')
@@ -100,4 +101,8 @@ def send_request(body):
 
 
 def create_ami(instnceId):
-    pass
+    print("Will be Creating AMI from Instance %s", instnceId)
+    Todaytime = datetime.datetime.now()
+    NewImageName = "Windows2019"+"-"+str(Todaytime.year)+"-"+str(Todaytime.month)+"-"+str(Todaytime.day)+"-"+str(Todaytime.hour) + str(Todaytime.minute)
+    NewImageResponse = client.create_image(InstanceId=instnceId, NoReboot=True, Name=NewImageName)
+    print(NewImageResponse)
