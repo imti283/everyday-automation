@@ -1,3 +1,7 @@
+<#
+If you have a json output from terraform/terragrunt plan, this script will help you to parse it nicely and mail in tabular format 
+with all changes(i.e create,delete,update,replace..etc except no-op)
+#>
 $val = terragrunt run-all show -json plan.out
 $Style = @"
 <style>
